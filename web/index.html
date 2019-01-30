@@ -14,7 +14,37 @@
 </head>
 
 <body>
-  <my-app>Loading...</my-app>
+  <nav class="navbar is-dark">
+    <div class="navbar-brand">
+      <a class="navbar-item brand-text">VERONICA ROMAMESCO</a>
+    </div>
+  </nav>
+
+  <section class="columns">
+    <aside class="column is-2 section is-hidden-mobile">
+      <p class="menu-label">Navigation</p>
+      <ul class="menu-list">
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#" class="is-active">Test</a>
+        </li>
+      </ul>
+    </aside>
+    
+    <div class="container column is-10">
+      <div class="section">
+        <my-app>Loading...</my-app>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>
+      Created using: Dart, Angular, Bulma
+    </p>
+  </footer>
 </body>
 
 </html>

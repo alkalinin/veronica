@@ -1,0 +1,11 @@
+@import "lib/bulma/utilities/initial-variables";
+@import "lib/bulma/utilities/functions";
+
+//$footer-background-color: #ffb3b3;
+$footer-padding: 1rem 1rem 1rem;
+
+@import "lib/bulma/bulma";
+.footer {
+  padding: 1rem 1rem 1rem;
+}
+
