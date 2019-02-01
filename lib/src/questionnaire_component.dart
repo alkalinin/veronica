@@ -3,7 +3,7 @@ import 'package:angular/angular.dart';
 import 'questionnaire_service.dart';
 
 @Component(
-  selector: 'my-questionnaire',
+  selector: 'roma-questionnaire',
   templateUrl: 'questionnaire_component.html',
   styleUrls: ['questionnaire_component.css'],
   directives: [coreDirectives],

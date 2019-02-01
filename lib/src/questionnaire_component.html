@@ -1,21 +1,22 @@
-<p>Question: {{page + 1}}: {{questions[page + 1]}}</p>
-
-<div>
-  <p>Strongly Disagree</p>
-  <div *ngFor="let a of answers">
-      <input type="radio" name="answers"
-            [value]="a" [checked]="currentAnswers[page] == a"
-            (click)="currentAnswers[page] = a">
-      {{a}}
+<div class="content">
+  <div class="card">
+    <div class="card-header">
+      <p class="card-header-title">Questionare</p>
+    </div>
+    <div class="card-content">
+      <p>Question: {{page + 1}}: {{questions[page + 1]}}</p>
+      <div>
+        <p>Strongly Disagree</p>
+        <div *ngFor="let a of answers">
+          <input type="radio" name="answers" [value]="a" [checked]="currentAnswers[page] == a" (click)="currentAnswers[page] = a">
+          {{a}}
+        </div>
+        <p>Strongly Agree</p>
+      </div>
+      <div>
+        <button (click)="onPrev()" [disabled]="page === 0">Prev</button>
+        <button (click)="onNext()" [disabled]="page === questions.length - 1">Next</button>
+      </div>
+    </div>
   </div>
-<p>Strongly Agree</p>
-
-
 </div>
-
-
-<div>
-  <button (click)="onPrev()" [disabled]="page === 0">Prev</button>
-  <button (click)="onNext()" [disabled]="page === questions.length - 1">Next</button>
-</div>
-
