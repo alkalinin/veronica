@@ -1,22 +1,42 @@
-<div class="content">
-  <div class="card">
-    <div class="card-header">
-      <p class="card-header-title">Questionare</p>
-    </div>
-    <div class="card-content">
-      <p>Question: {{page + 1}}: {{questions[page + 1]}}</p>
-      <div>
-        <p>Strongly Disagree</p>
-        <div *ngFor="let a of answers">
-          <input type="radio" name="answers" [value]="a" [checked]="currentAnswers[page] == a" (click)="currentAnswers[page] = a">
-          {{a}}
+<div class="card">
+  <div class="card-header">
+    <p class="card-header-title">Questionare</p>
+  </div>
+  <div class="card-content">
+    <div class="content" *ngIf="page == 0">
+      <h5>Before you start please tell us your</h5>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input [(ngModel)]="name" class="input" type="text" placeholder="Name">
         </div>
-        <p>Strongly Agree</p>
       </div>
-      <div>
-        <button (click)="onPrev()" [disabled]="page === 0">Prev</button>
-        <button (click)="onNext()" [disabled]="page === questions.length - 1">Next</button>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input [(ngModel)]="email" class="input" type="text" placeholder="Email">
+        </div>
       </div>
+    </div>
+    <div class="content" *ngIf="page > 0">
+      <h5>Question {{page}} ({{questions.length}}): {{questions[page]}}</h5>
+
+      <table class="table">
+        <tr *ngFor="let a of answers">
+          <td>
+            <span *ngIf="a == '-3'">Strongly Disagree</span>
+            <span *ngIf="a == '+3'">Strongly Agree</span>
+          </td>
+          <td>{{a}}</td>
+          <td><input type="radio" name="answers" [value]="a" [checked]="currentAnswers[page] == a" (click)="currentAnswers[page] = a"></td>
+        </tr>
+      </table>
+    </div>
+
+    <div>
+      <button (click)="onPrev()" [disabled]="page == 0">Prev</button>
+      <button (click)="onNext()" [disabled]="page == questions.length">Next</button>
     </div>
   </div>
 </div>

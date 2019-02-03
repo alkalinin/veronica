@@ -20,7 +20,7 @@ class QuestionnaireService {
     18: 'I believe there is no point in trying to guess what my child feels.'
   };
 
-  var _answers = ['1', '2', '3', '4', '5', '6', '7'];
+  var _answers = ['-3', '-2', '-1', '0', '+1', '+2', '+3'];
 
   Map getQuestions() {
     return _questions;

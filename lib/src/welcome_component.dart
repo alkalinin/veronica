@@ -1,4 +1,7 @@
 import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
+
+import 'route_paths.dart';
 
 @Component(
   selector: 'roma-welcome',
@@ -7,4 +10,9 @@ import 'package:angular/angular.dart';
   directives: [coreDirectives],
 )
 class WelcomeComponent {
+  final Router _router;
+
+  WelcomeComponent(this._router);
+
+  Future<NavigationResult> gotoQuestionnaire() => _router.navigate(RoutePaths.questionnaire.toUrl()); 
 }
