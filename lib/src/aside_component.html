@@ -2,10 +2,12 @@
   <p class="menu-label">Navigation</p>
   <ul class="menu-list">
     <li>
-      <a href="#">Welcome</a>
+        <a [routerLink]="RoutePaths.welcome.toUrl()"
+           [routerLinkActive]="'is-active'">Welcome</a>
     </li>
     <li>
-      <a href="#" class="is-active">Questionare</a>
+        <a [routerLink]="RoutePaths.questionnaire.toUrl()"
+           [routerLinkActive]="'is-active'">Questionare</a>
     </li>
   </ul>
 </aside>

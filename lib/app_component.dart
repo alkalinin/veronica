@@ -1,15 +1,17 @@
 import 'package:angular/angular.dart';
+import 'package:angular_router/angular_router.dart';
 
 import 'src/nav_component.dart';
 import 'src/aside_component.dart';
-import 'src/welcome_component.dart';
-import 'src/questionnaire_component.dart';
+import 'src/route_paths.dart';
+import 'src/routes.dart';
 
 @Component(
   selector: 'roma-app',
   templateUrl: 'app_component.html',
   styleUrls: ['app_component.css'],
-  directives: [coreDirectives, NavComponent, AsideComponent, WelcomeComponent, QuestionnaireComponent]
+  directives: [coreDirectives, routerDirectives, NavComponent, AsideComponent],
+  exports: [RoutePaths, Routes]
 )
 class AppComponent {
   final title = 'Veronica Romanesco Project';
