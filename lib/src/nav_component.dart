@@ -2,7 +2,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
 import 'login_component.dart';
-import 'nav_flags.dart';
+import 'nav_info.dart';
 import 'route_paths.dart';
 
 @Component(
@@ -13,10 +13,9 @@ import 'route_paths.dart';
   exports: [RoutePaths]
 )
 class NavComponent {
-  NavFlags flags = NavFlags(false);
+  NavInfo navInfo = NavInfo(isLoginActive: false);
 
   void onLogin() {
-    print('AAA');
-    flags.isLoginActive = true;
+    navInfo.isLoginActive = true;
   }
 }

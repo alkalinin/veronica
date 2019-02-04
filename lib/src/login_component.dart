@@ -1,6 +1,6 @@
 import 'package:angular/angular.dart';
 
-import "nav_flags.dart";
+import "nav_info.dart";
 
 @Component(
   selector: 'roma-login',
@@ -10,5 +10,5 @@ import "nav_flags.dart";
 )
 class LoginComponent {
   @Input()
-  NavFlags navFlags;
+  NavInfo navInfo;
 }
