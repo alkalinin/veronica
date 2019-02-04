@@ -1,7 +1,7 @@
 @import "lib/bulma/utilities/initial-variables";
 @import "lib/bulma/utilities/functions";
 
-$footer-padding: 1.0rem 0.0rem 1.0rem;
+$footer-padding: 1.0rem 1.0rem 1.0rem;
 
 @import "lib/bulma/bulma";
 
@@ -11,13 +11,6 @@ html, body {
   line-height: 1.5;
   height: 100%;
   background: #ECF0F3;
-}
-
-.columns {
-  width: 100%;
-  height: 100%;
-  margin-left: 0;
-
 }
 
 nav.navbar {
