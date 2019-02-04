@@ -5,9 +5,10 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item">Login</a>
+        <a class="navbar-item" (click)="onLogin()">Login</a>
       </div>
     </div>
   </div>
 </nav>
 
+<roma-login [navFlags]="flags"></roma-login>

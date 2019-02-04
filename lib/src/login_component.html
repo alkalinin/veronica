@@ -1,7 +1,12 @@
-<div class="modal">
-    <div class="modal-background"></div>
-    <div class="modal-content">
+<div class="modal" [class.is-active]="navFlags.isLoginActive">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button class="delete" aria-label="close" (click)="navFlags.isLoginActive = false"></button>
+    </header>
+    <section class="modal-card-body">
       <p>Hello</p>
-    </div>
-    <button class="modal-close is-large" aria-label="close"></button>
+    </section>
   </div>
+</div>
