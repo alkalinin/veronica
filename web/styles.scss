@@ -1,10 +1,10 @@
-@import "lib/bulma/utilities/initial-variables";
-@import "lib/bulma/utilities/functions";
+@import "lib/assets/scss/utilities/initial-variables";
+@import "lib/assets/scss/utilities/functions";
 
 $footer-padding: 1.0rem 1.0rem 1.0rem;
 $modal-background-background-color: rgba($black, 0.50);
 
-@import "lib/bulma/bulma";
+@import "lib/assets/scss/bulma";
 
 html, body {
   font-family: 'Open Sans', serif;

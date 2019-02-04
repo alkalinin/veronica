@@ -1,8 +1,8 @@
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
+import 'user_service.dart';
 import 'login_component.dart';
-import 'auth_service.dart';
 import 'nav_info.dart';
 import 'route_paths.dart';
 
@@ -14,13 +14,13 @@ import 'route_paths.dart';
   exports: [RoutePaths]
 )
 class NavComponent {
-  NavInfo navInfo = NavInfo(isLoginActive: false);
-  final AuthService _authService;
+  final NavInfo navInfo = NavInfo(isLoginActive: false);
+  final UserService userService;
 
-  NavComponent(this._authService);
+  NavComponent(this.userService);
 
   void onLogin() {
     navInfo.isLoginActive = true;
-    _authService.auth = true;
+    userService.isAuthorized = true;
   }
 }
