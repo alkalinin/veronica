@@ -9,6 +9,7 @@ dependencies:
   angular: ^5.0.0
   angular_forms: ^2.0.0
   angular_router: ^2.0.0-alpha+21
+  firebase: ^5.0.0
 
 dev_dependencies:
   build_runner: ^1.0.0
