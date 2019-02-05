@@ -1,18 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
 @import "lib/assets/scss/utilities/initial-variables";
 @import "lib/assets/scss/utilities/functions";
 
-$footer-padding: 1.0rem 1.0rem 1.0rem;
+$body-background-color: #ECF0F3;
 $modal-background-background-color: rgba($black, 0.50);
+$footer-padding: 1.0rem 1.0rem 1.0rem;
 
 @import "lib/assets/scss/bulma";
-
-html, body {
-  font-family: 'Open Sans', serif;
-  font-size: 18px;
-  line-height: 1.5;
-  height: 100%;
-  background: #ECF0F3;
-}
 
 nav.navbar {
   border-top: 4px solid #276cda;
@@ -29,14 +24,15 @@ nav.navbar {
 
 .menu-label {
   color: #8F99A3;
+  font-size: 16px;
   letter-spacing: 1.3;
   font-weight: 700;
 }
 .menu-list a {
   color: #0F1D38;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 0.25em 0.0em;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0.25em 0.5em;
 }
 .menu-list a:hover {
   background-color: transparent;
@@ -54,6 +50,7 @@ nav.navbar {
 }
 .card-header-title {
   color: #8F99A3;
+  font-size: 18px;
   font-weight: 400;
 }
 
