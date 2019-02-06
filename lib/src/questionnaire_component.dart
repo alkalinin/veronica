@@ -2,8 +2,9 @@ import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
 import 'package:angular_router/angular_router.dart';
 
-import 'questionnaire_service.dart';
 import 'route_paths.dart';
+import 'user_service.dart';
+import 'questionnaire_service.dart';
 
 @Component(
   selector: 'roma-questionnaire',
@@ -13,7 +14,10 @@ import 'route_paths.dart';
   providers: [ClassProvider(QuestionnaireService)]
 )
 class QuestionnaireComponent implements OnInit {
+  final Router _router;
   final QuestionnaireService _questionnaireService;
+  final UserService _userService;
+
   int page = 0;
   Map questions;
   List<String> answers;
@@ -21,9 +25,8 @@ class QuestionnaireComponent implements OnInit {
   String email;
   String question;
   List<String> currentAnswers = [];
-  final Router _router;
 
-  QuestionnaireComponent(this._router, this._questionnaireService);
+  QuestionnaireComponent(this._router, this._userService, this._questionnaireService);
 
   void _init() {
     questions = _questionnaireService.getQuestions();
@@ -36,6 +39,11 @@ class QuestionnaireComponent implements OnInit {
   void onNext() => ++page;
   
   void onPrev() => --page;
+
+  void onSelect(String answer) {
+    currentAnswers[page - 1] = answer;
+    _userService.saveAnswers();
+  }
 
   Future<NavigationResult> gotoResults() => _router.navigate(RoutePaths.results.toUrl()); 
 }
