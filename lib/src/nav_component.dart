@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'package:angular/angular.dart';
 import 'package:angular_router/angular_router.dart';
 
@@ -13,8 +14,13 @@ import 'route_paths.dart';
 )
 class NavComponent {
   final UserService _userService;
+  bool isBurgerMenuActive = false;
 
   NavComponent(this._userService);
+
+  void onBurger() {
+    isBurgerMenuActive = ! isBurgerMenuActive;
+  }
 
   void onLogin() {
     _userService.showLoginForm = true;
