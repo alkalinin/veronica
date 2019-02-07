@@ -10,10 +10,10 @@
     </div>
     <div class="navbar-menu">
       <div class="navbar-end">
-        <a class="navbar-item" (click)="onLogin()">Login</a>
+        <a class="navbar-item" (click)="onLogin()" *ngIf="! isAuthorized()">Login</a>
+        <a class="navbar-item" (click)="onLogout()" *ngIf="isAuthorized()">Logout</a>
       </div>
     </div>
   </div>
 </nav>
 
-<roma-login [navInfo]="navInfo"></roma-login>

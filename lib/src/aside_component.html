@@ -11,6 +11,12 @@
     </li>
   </ul>
 
-  <p>{{userService.isAuthorized}}</p>
-
+  <div *ngIf="showAdminPanel()" class="nav-admin">
+    <p class="menu-label">Admin</p>
+    <ul class="menu-list">
+      <li>
+          <a>Results</a>
+      </li>
+    </ul>    
+  </div>
 </aside>

@@ -4,6 +4,7 @@ import 'package:angular_router/angular_router.dart';
 import 'src/user_service.dart';
 import 'src/nav_component.dart';
 import 'src/aside_component.dart';
+import 'src/login_component.dart';
 import 'src/route_paths.dart';
 import 'src/routes.dart';
 
@@ -11,7 +12,7 @@ import 'src/routes.dart';
   selector: 'roma-app',
   templateUrl: 'app_component.html',
   styleUrls: ['app_component.css'],
-  directives: [coreDirectives, routerDirectives, NavComponent, AsideComponent],
+  directives: [coreDirectives, routerDirectives, NavComponent, AsideComponent, LoginComponent],
   exports: [RoutePaths, Routes],
   providers: [ClassProvider(UserService)]
 )

@@ -3,9 +3,10 @@ import 'package:firebase/firestore.dart' as fs;
 
 class UserService {
   bool isInitialized = false;
-  bool isAuthorized = false;
+  bool showLoginForm = false;
 
   fb.Auth auth;
+  fb.UserCredential credential;
   fs.Firestore store;
 
   UserService()  {
@@ -26,21 +27,38 @@ class UserService {
         auth = fb.auth();
         store = fb.firestore();
 
-        print('Initialization OK');    
+        print('Initialization OK');
+        print(isAuthorized());
     } on fb.FirebaseJsNotLoadedException catch (e) {
       print(e);
     }
   }
 
-  void authorize() async {
-    await auth.signInAnonymously();
-    isAuthorized = true;
-    print("Authorized!!!");
+  void signInAnonymously() async {
+    try {
+      credential = await auth.signInAnonymously();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void signInWithEmailAndPassword(String email, String password) async {
+    try {
+      credential = await auth.signInWithEmailAndPassword(email, password);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  void signOut() {
+    credential = null;
   }
 
   void saveAnswers() async {
-    if (! isAuthorized) {
-      await authorize();
+    if (! isAuthorized()) {
+      await signInAnonymously();
     }
   }
+
+  bool isAuthorized() => credential != null;
 }

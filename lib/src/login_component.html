@@ -1,36 +1,39 @@
-<div class="modal" [class.is-active]="navInfo.isLoginActive">
+<div class="modal" [class.is-active]="isActive()">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
       <p class="modal-card-title">Login</p>
-      <button class="delete" aria-label="close" (click)="navInfo.isLoginActive = false"></button>
+      <button class="delete" aria-label="close" (click)="onClose()"></button>
     </header>
     <section class="modal-card-body">
-      <div class="field">
-        <label class="label">Email</label>
-        <div class="control has-icons-left">
-          <input class="input" type="email" placeholder="Email" [(ngModel)]="email">
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
+      <form>
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control has-icons-left">
+            <input class="input" type="email" placeholder="Email" autocomplete="email" [(ngModel)]="email">
+            <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+          </div>
         </div>
-      </div>
-      <div class="field">
-        <label class="label">Password</label>
-        <div class="control has-icons-left">
-          <input class="input" type="password" placeholder="Password" [(ngModel)]="password">
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control has-icons-left">
+            <input class="input" type="password" placeholder="Password" autocomplete="password" [(ngModel)]="password">
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </div>
+          <p class="help is-danger">{{error}}</p>
         </div>
-      </div>
-      <div class="field">
-        <div class="control">
-          <button class="button is-success" (click)="login()">
-            Login
-          </button>
+        <div class="field">
+          <div class="control">
+            <button class="button is-success" (click)="login()">
+              Login
+            </button>
+          </div>
         </div>
-      </div>
+      </form>
     </section>
   </div>
 </div>

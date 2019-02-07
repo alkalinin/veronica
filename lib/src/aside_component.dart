@@ -14,7 +14,9 @@ import 'routes.dart';
 
 )
 class AsideComponent {
-  final UserService userService;
+  final UserService _userService;
 
-  AsideComponent(this.userService);
+  AsideComponent(this._userService);
+
+  bool showAdminPanel() => _userService.isAuthorized();
 }
