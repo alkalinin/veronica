@@ -2,11 +2,15 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /users/{userId} {
       //allow create, read, update, delete: if request.auth.uid == userId;
-      allow read, update, delete:
-        if (request.auth.uid == userId) ||
+      allow read, update, delete: 
+        if (request.auth.uid == userId) || 
         ("admin" in get(/databases/$(database)/documents/users-roles/$(request.auth.uid)).data.roles);
       allow create:
         if request.auth.uid != null;
+    }
+    match /users-roles/{userId} {
+      allow read:
+        if request.auth.uid == userId;
     }
   }
 }
