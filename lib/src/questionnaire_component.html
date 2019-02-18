@@ -2,47 +2,62 @@
   <div class="card-header">
     <p class="card-header-title">Questionare</p>
   </div>
-  <div class="card-content">
+
+  <!-- Questionare form -->
+  <div class="card-content" *ngIf="! isCompleted">
+    <!-- Name and Email form -->
     <div class="content" *ngIf="page == 0">
       <h5>Before you start please tell us your</h5>
       <div class="field">
         <label class="label">Name</label>
         <div class="control">
-          <input [(ngModel)]="name" class="input" type="text" placeholder="Name">
+          <input [(ngModel)]="userData.name" class="input" type="text" placeholder="Name">
         </div>
       </div>
 
       <div class="field">
         <label class="label">Email</label>
         <div class="control">
-          <input [(ngModel)]="email" class="input" type="text" placeholder="Email">
+          <input [(ngModel)]="userData.email" class="input" type="text" placeholder="Email">
         </div>
       </div>
     </div>
+
+    <!-- Questions form -->
     <div class="content" *ngIf="page > 0">
       <h5>Question {{page}}/{{questions.length}}: {{questions[page]}}</h5>
 
       <table class="table is-bordered">
-        <tr *ngFor="let a of answers">
+        <tr *ngFor="let choice of choices">
           <td>
-            <input type="radio" name="answers" [value]="a" [checked]="currentAnswers[page - 1] == a" (click)="onSelect(a)">
+            <input 
+              type="radio" 
+              name="answer" 
+              [value]="choice"
+              [checked]="userData.answers[page - 1] == choice" 
+              (click)="onAnswer(choice)">
           </td>
           <td class="has-text-centered">
-            {{a}}
+            {{choice}}
           </td>
           <td>
-            <span *ngIf="a == '-3'">Strongly Disagree</span>
-            <span *ngIf="a == '+3'">Strongly Agree</span>
+            <span *ngIf="choice == '-3'">Strongly Disagree</span>
+            <span *ngIf="choice == '+3'">Strongly Agree</span>
           </td>
         </tr>
       </table>
     </div>
     <div>
-      <button class="button" (click)="onPrev()" [disabled]="page == 0">Prev</button>
-      <button class="button" (click)="onNext()" [disabled]="(page == questions.length) || ((page > 0) && (currentAnswers[page - 1] == null))">Next</button>
+      <button class="button" (click)="onPrev()" [disabled]="isPrevDisabled()">Prev</button>
+      <button class="button" (click)="onNext()" [disabled]="isNextDisabled()">Next</button>
     </div>
-    <div class="has-text-centered" *ngIf="currentAnswers[questions.length - 1] != null">
-      <button class="button" (click)="gotoResults()">Show Results</button>
+    <div class="has-text-centered" *ngIf="isResultsButtonVisible()">
+      <button class="button" (click)="onResults()">Show Results</button>
     </div>
+  </div>
+
+  <!-- Results -->
+  <div class="card-content" *ngIf="isCompleted">
+      <p>Congratulations!!! Your are a really good parent!</p>
   </div>
 </div>

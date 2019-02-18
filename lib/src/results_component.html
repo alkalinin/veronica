@@ -4,7 +4,11 @@
       <p class="card-header-title">Results</p>
     </div>
     <div class="card-content">
-      <p>Congratulations!!! Your are a really good parent!</p>
+      <p>List of results from all users</p>
+
+      <p *ngFor="let userData of usersData">
+        {{userData.name}}, {{userData.email}}
+      </p>
     </div>
   </div>
 </div>

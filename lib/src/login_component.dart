@@ -21,14 +21,14 @@ class LoginComponent {
   void login() async {
     try {
       await _userService.signInWithEmailAndPassword(email, password);
-      _userService.showLoginForm = false;
+      _userService.isLoginFormVisible = false;
       error = null;
     } catch (e) {
       error = e.toString();
     }
   }
 
-  bool isActive() => _userService.showLoginForm;
+  bool isActive() => _userService.isLoginFormVisible;
 
-  void onClose() => _userService.showLoginForm = false;
+  void onClose() => _userService.isLoginFormVisible = false;
 }

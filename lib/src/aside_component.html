@@ -11,11 +11,12 @@
     </li>
   </ul>
 
-  <div *ngIf="showAdminPanel()" class="nav-admin">
+  <div *ngIf="isAdminPanelVisible()" class="nav-admin">
     <p class="menu-label">Admin</p>
     <ul class="menu-list">
       <li>
-          <a>Results</a>
+        <a [routerLink]="RoutePaths.results.toUrl()"
+           [routerLinkActive]="'is-active'">Results</a>
       </li>
     </ul>    
   </div>

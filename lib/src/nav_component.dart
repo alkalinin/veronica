@@ -23,12 +23,12 @@ class NavComponent {
   }
 
   void onLogin() {
-    _userService.showLoginForm = true;
+    _userService.isLoginFormVisible = true;
   }
   
   void onLogout() {
     _userService.signOut();
   }
 
-  bool isAuthorized() => _userService.isAuthorized();
+  bool isAdminAuthorized() => _userService.isAuthorizedAdmin();
 }

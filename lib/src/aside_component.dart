@@ -18,5 +18,5 @@ class AsideComponent {
 
   AsideComponent(this._userService);
 
-  bool showAdminPanel() => _userService.isAuthorized();
+  bool isAdminPanelVisible() => _userService.isAuthorizedAdmin();
 }

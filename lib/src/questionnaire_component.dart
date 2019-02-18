@@ -1,8 +1,7 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
-import 'package:angular_router/angular_router.dart';
 
-import 'route_paths.dart';
+import 'user_data.dart';
 import 'user_service.dart';
 import 'questionnaire_service.dart';
 
@@ -10,28 +9,26 @@ import 'questionnaire_service.dart';
   selector: 'roma-questionnaire',
   templateUrl: 'questionnaire_component.html',
   styleUrls: ['questionnaire_component.css'],
-  directives: [coreDirectives, formDirectives],
-  providers: [ClassProvider(QuestionnaireService)]
+  directives: [coreDirectives, formDirectives]
 )
 class QuestionnaireComponent implements OnInit {
-  final Router _router;
   final QuestionnaireService _questionnaireService;
   final UserService _userService;
 
-  int page = 0;
-  Map questions;
-  List<String> answers;
-  String name;
-  String email;
-  String question;
-  List<String> currentAnswers = [];
+  Map<int, String> questions;
+  List<String> choices;
 
-  QuestionnaireComponent(this._router, this._userService, this._questionnaireService);
+  int page = 0;
+  UserData userData = UserData.empty();
+
+  bool isCompleted = false;
+
+  QuestionnaireComponent(this._questionnaireService, this._userService);
 
   void _init() {
     questions = _questionnaireService.getQuestions();
-    answers = _questionnaireService.getAnswers();
-    currentAnswers.length = questions.length;
+    choices = _questionnaireService.getChoices();
+    userData.answers = List(questions.length);
   }
 
   void ngOnInit() => _init();
@@ -40,10 +37,29 @@ class QuestionnaireComponent implements OnInit {
   
   void onPrev() => --page;
 
-  void onSelect(String answer) {
-    currentAnswers[page - 1] = answer;
-    _userService.saveAnswers();
+  void onAnswer(String answer) {
+    userData.answers[page - 1] = answer;
   }
 
-  Future<NavigationResult> gotoResults() => _router.navigate(RoutePaths.results.toUrl()); 
+  void onResults() async {
+    isCompleted = true;
+
+    if (! _userService.isAuthorized()) {
+      await _userService.signInAnonymously();
+    }
+    
+    await _questionnaireService.saveAnswers(userData);
+  }
+
+  bool isPrevDisabled() {
+    return page == 0;
+  }
+
+  bool isNextDisabled() {
+    return (page == questions.length) || ((page > 0) && (userData.answers[page - 1] == null));
+  }
+
+  bool isResultsButtonVisible() {
+    return ! userData.answers.contains(null);
+  }
 }

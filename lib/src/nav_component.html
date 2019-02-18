@@ -10,8 +10,8 @@
     </div>
     <div id="navMenu" class="navbar-menu" [class.is-active]="isBurgerMenuActive">
       <div class="navbar-end">
-        <a class="navbar-item" (click)="onLogin()" *ngIf="! isAuthorized()">Login</a>
-        <a class="navbar-item" (click)="onLogout()" *ngIf="isAuthorized()">Logout</a>
+        <a class="navbar-item" (click)="onLogin()" *ngIf="! isAdminAuthorized()">Login</a>
+        <a class="navbar-item" (click)="onLogout()" *ngIf="isAdminAuthorized()">Logout</a>
       </div>
     </div>
   </div>

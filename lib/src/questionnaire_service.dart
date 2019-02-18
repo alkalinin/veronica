@@ -1,3 +1,8 @@
+import 'package:firebase/firebase.dart';
+import 'package:firebase/firestore.dart';
+
+import 'user_data.dart';
+
 class QuestionnaireService {
   var _questions = {
     1 : 'The only time I’m certain my child loves me is when he or she is smiling at me.',
@@ -20,13 +25,27 @@ class QuestionnaireService {
     18: 'I believe there is no point in trying to guess what my child feels.'
   };
 
-  var _answers = ['-3', '-2', '-1', '0', '+1', '+2', '+3'];
+  var _choices = ['-3', '-2', '-1', '0', '+1', '+2', '+3'];
 
-  Map getQuestions() {
+  Map<int, String> getQuestions() {
     return _questions;
   }
 
-  List<String> getAnswers() {
-    return _answers;
+  List<String> getChoices() {
+    return _choices;
+  }
+
+  void saveAnswers(UserData userData) async {
+    var uid = auth().currentUser.uid;
+    await firestore().collection('users').doc(uid).set(userData.toMap());
+  }
+
+  Future<List<UserData>> getAllAnswers() async {
+    List<UserData> allAnswers = List<UserData>();
+
+    allAnswers.add(UserData('A', 'B', ['+3', '+3', '+3']));
+    //var snapshot = await firestore().collection('users').get();
+    //return snapshot;
+    return allAnswers;
   }
 }

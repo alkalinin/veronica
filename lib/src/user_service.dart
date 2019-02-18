@@ -1,64 +1,29 @@
-import 'package:firebase/firebase.dart' as fb;
-import 'package:firebase/firestore.dart' as fs;
+import 'package:firebase/firebase.dart';
 
 class UserService {
   bool isInitialized = false;
-  bool showLoginForm = false;
+  bool isLoginFormVisible = false;
 
-  fb.Auth auth;
-  fb.UserCredential credential;
-  fs.Firestore store;
-
-  UserService()  {
-    initialize();
-  }
-
-  void initialize() {
-    try {
-      fb.initializeApp(
-        apiKey: 'AIzaSyCOjTrMcjI_0PVGlUtoFGOJ9qnDLgJGbDw',
-        authDomain: 'veronica-roma.firebaseapp.com',
-        databaseURL: 'https://veronica-roma.firebaseio.com',
-        projectId: "veronica-roma",
-        storageBucket: 'veronica-roma.appspot.com');
-
-        isInitialized = true;
-
-        auth = fb.auth();
-        store = fb.firestore();
-
-        print('Initialization OK');
-        print(isAuthorized());
-    } on fb.FirebaseJsNotLoadedException catch (e) {
-      print(e);
-    }
-  }
+  UserCredential userCredential;
+  List<String> userRoles;
 
   void signInAnonymously() async {
-    try {
-      credential = await auth.signInAnonymously();
-    } catch (e) {
-      rethrow;
-    }
+    userCredential = await auth().signInAnonymously();
   }
 
   void signInWithEmailAndPassword(String email, String password) async {
-    try {
-      credential = await auth.signInWithEmailAndPassword(email, password);
-    } catch (e) {
-      rethrow;
-    }
+    userCredential = await auth().signInWithEmailAndPassword(email, password);
+    
+    var snapshot = await firestore().collection('users-roles').doc(userCredential.user.uid).get();
+    userRoles = snapshot.data()['roles'].cast<String>();
   }
 
   void signOut() {
-    credential = null;
+    userCredential = null;
+    userRoles = null;
   }
 
-  void saveAnswers() async {
-    if (! isAuthorized()) {
-      await signInAnonymously();
-    }
-  }
+  bool isAuthorized() => userCredential != null;
 
-  bool isAuthorized() => credential != null;
+  bool isAuthorizedAdmin() => (userRoles != null) && userRoles.contains('admin');
 }
