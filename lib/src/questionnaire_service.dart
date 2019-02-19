@@ -43,9 +43,11 @@ class QuestionnaireService {
   Future<List<UserData>> getAllAnswers() async {
     List<UserData> allAnswers = List<UserData>();
 
-    allAnswers.add(UserData('A', 'B', ['+3', '+3', '+3']));
-    //var snapshot = await firestore().collection('users').get();
-    //return snapshot;
+    var snapshot = await firestore().collection('users').get();
+    for (var doc in snapshot.docs) {
+      var data = doc.data();
+      allAnswers.add(UserData(data['name'], data['email'], data['answers'].cast<String>()));
+    }
     return allAnswers;
   }
 }

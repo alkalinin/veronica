@@ -10,6 +10,6 @@ class UserData {
   Map<String, dynamic> toMap() => {
     'name': name,
     'email': email,
-    'answer': answers
+    'answers': answers
   };
 }

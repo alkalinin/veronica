@@ -4,11 +4,20 @@
       <p class="card-header-title">Results</p>
     </div>
     <div class="card-content">
-      <p>List of results from all users</p>
-
-      <p *ngFor="let userData of usersData">
-        {{userData.name}}, {{userData.email}}
-      </p>
+      <table class="table is-bordered">
+        <thead>
+          <td>#</td>
+          <td>Name</td>
+          <td>Email</td>
+          <td>Answers</td>
+        </thead>
+        <tr *ngFor="let userData of usersData; let i = index">
+          <td>{{i}}</td>
+          <td>{{userData.name}}</td>
+          <td>{{userData.email}}</td>
+          <td>{{userData.answers}}</td>
+        </tr> 
+      </table>
     </div>
   </div>
 </div>
