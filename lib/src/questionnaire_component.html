@@ -1,10 +1,10 @@
 <div class="card">
   <div class="card-header">
-    <p class="card-header-title">Questionare</p>
+    <p class="card-header-title">Questionnare</p>
   </div>
 
-  <!-- Questionare form -->
-  <div class="card-content" *ngIf="! isCompleted">
+  <!-- Questionnare form -->
+  <div class="card-content" *ngIf="isQuestionnareVisible()">
     <!-- Name and Email form -->
     <div class="content" *ngIf="page == 0">
       <h5>Before you start please tell us your</h5>
@@ -57,7 +57,15 @@
   </div>
 
   <!-- Results -->
-  <div class="card-content" *ngIf="isCompleted">
-      <p>Congratulations!!! Your are a really good parent!</p>
+  <div class="card-content" *ngIf="isResultsVisible()">
+    <p>Congratulations!!! Your are a really good parent!</p>
   </div>
+
+  <!-- Only for admin users -->
+  <div class="card-content" *ngIf="isAdminLinkVisible()">
+    <p>
+      Admin can not pass the tests.
+      Please use <a [routerLink]="RoutePaths.results.toUrl()">results</a> page.
+    </p>
+  </div>  
 </div>

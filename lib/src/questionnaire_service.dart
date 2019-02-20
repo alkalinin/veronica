@@ -37,12 +37,20 @@ class QuestionnaireService {
 
   void saveAnswers(UserData userData) async {
     var uid = auth().currentUser.uid;
+    if (uid == null) {
+      return;
+    }
     await firestore().collection('users').doc(uid).set(userData.toMap());
   }
 
   Future<List<UserData>> getAllAnswers() async {
     List<UserData> allAnswers = List<UserData>();
 
+    var uid = auth().currentUser.uid;
+    if (uid == null) {
+      return allAnswers;
+    }
+    
     var snapshot = await firestore().collection('users').get();
     for (var doc in snapshot.docs) {
       var data = doc.data();

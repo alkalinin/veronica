@@ -11,7 +11,6 @@ import 'routes.dart';
   styleUrls: ['aside_component.css'],
   directives: [coreDirectives, routerDirectives],
   exports: [RoutePaths, Routes]
-
 )
 class AsideComponent {
   final UserService _userService;

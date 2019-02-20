@@ -4,26 +4,44 @@ class UserService {
   bool isInitialized = false;
   bool isLoginFormVisible = false;
 
-  UserCredential userCredential;
+  User user;
   List<String> userRoles;
 
+  UserService () {
+    _init();
+  }
+
+  Future _init() async {
+    user = auth().currentUser;
+    if (user != null) {
+      var snapshot = await firestore().collection('users-roles').doc(user.uid).get();
+      userRoles = snapshot.data()['roles'].cast<String>();
+    }
+  }
+
   void signInAnonymously() async {
-    userCredential = await auth().signInAnonymously();
+    var userCredential = await auth().signInAnonymously();
+    user = userCredential.user;
   }
 
   void signInWithEmailAndPassword(String email, String password) async {
-    userCredential = await auth().signInWithEmailAndPassword(email, password);
+    var userCredential = await auth().signInWithEmailAndPassword(email, password);
+    user = userCredential.user;
     
-    var snapshot = await firestore().collection('users-roles').doc(userCredential.user.uid).get();
+    var snapshot = await firestore().collection('users-roles').doc(user.uid).get();
     userRoles = snapshot.data()['roles'].cast<String>();
   }
 
   void signOut() {
-    userCredential = null;
+    user = null;
     userRoles = null;
   }
 
-  bool isAuthorized() => userCredential != null;
+  bool isAuthorized() {
+    return user != null;
+  }
 
-  bool isAuthorizedAdmin() => (userRoles != null) && userRoles.contains('admin');
+  bool isAuthorizedAdmin() {
+    return (userRoles != null) && userRoles.contains('admin');
+  }
 }

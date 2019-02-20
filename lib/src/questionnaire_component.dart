@@ -1,15 +1,19 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart';
+import 'package:angular_router/angular_router.dart';
 
 import 'user_data.dart';
 import 'user_service.dart';
 import 'questionnaire_service.dart';
+import 'route_paths.dart';
+import 'routes.dart';
 
 @Component(
   selector: 'roma-questionnaire',
   templateUrl: 'questionnaire_component.html',
   styleUrls: ['questionnaire_component.css'],
-  directives: [coreDirectives, formDirectives]
+  directives: [coreDirectives, formDirectives, routerDirectives],
+  exports: [RoutePaths, Routes]
 )
 class QuestionnaireComponent implements OnInit {
   final QuestionnaireService _questionnaireService;
@@ -44,11 +48,9 @@ class QuestionnaireComponent implements OnInit {
   void onResults() async {
     isCompleted = true;
 
-    if (! _userService.isAuthorized()) {
-      await _userService.signInAnonymously();
-    }
-    
+    await _userService.signInAnonymously();
     await _questionnaireService.saveAnswers(userData);
+    await _userService.signOut();
   }
 
   bool isPrevDisabled() {
@@ -61,5 +63,17 @@ class QuestionnaireComponent implements OnInit {
 
   bool isResultsButtonVisible() {
     return ! userData.answers.contains(null);
+  }
+
+  bool isQuestionnareVisible() {
+    return (! isCompleted) && (! _userService.isAuthorizedAdmin());
+  }
+
+  bool isResultsVisible() {
+    return isCompleted && (! _userService.isAuthorizedAdmin());
+  }
+
+  bool isAdminLinkVisible() {
+    return _userService.isAuthorizedAdmin();
   }
 }
