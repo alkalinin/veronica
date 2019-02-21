@@ -12,6 +12,8 @@
       <div class="navbar-end">
         <a class="navbar-item" (click)="onLogin()" *ngIf="! isAdminAuthorized()">Login</a>
         <a class="navbar-item" (click)="onLogout()" *ngIf="isAdminAuthorized()">Logout</a>
+        <a class="navbar-item" [routerLink]="RoutePaths.welcome.toUrl()" *ngIf="isBurgerMenuActive">Welcome</a>
+        <a class="navbar-item" [routerLink]="RoutePaths.questionnaire.toUrl()" *ngIf="isBurgerMenuActive">Questionare</a>
       </div>
     </div>
   </div>

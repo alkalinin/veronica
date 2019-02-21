@@ -6,14 +6,13 @@ import 'user_data.dart';
 import 'user_service.dart';
 import 'questionnaire_service.dart';
 import 'route_paths.dart';
-import 'routes.dart';
 
 @Component(
   selector: 'roma-questionnaire',
   templateUrl: 'questionnaire_component.html',
   styleUrls: ['questionnaire_component.css'],
   directives: [coreDirectives, formDirectives, routerDirectives],
-  exports: [RoutePaths, Routes]
+  exports: [RoutePaths]
 )
 class QuestionnaireComponent implements OnInit {
   final QuestionnaireService _questionnaireService;

@@ -47,11 +47,11 @@
         </tr>
       </table>
     </div>
-    <div>
+    <div class="content">
       <button class="button" (click)="onPrev()" [disabled]="isPrevDisabled()">Prev</button>
       <button class="button" (click)="onNext()" [disabled]="isNextDisabled()">Next</button>
     </div>
-    <div class="has-text-centered" *ngIf="isResultsButtonVisible()">
+    <div class="content has-text-centered" *ngIf="isResultsButtonVisible()">
       <button class="button" (click)="onResults()">Show Results</button>
     </div>
   </div>

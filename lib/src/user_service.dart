@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase/firebase.dart';
 
 class UserService {
